@@ -29,6 +29,7 @@ public class EmployeeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_users);
         ButterKnife.bind(this);
 
+        //setup Dagger to resolve all Dependencies - Ignore this part
         EmployeesComponent employeeComponent = DaggerEmployeesComponent.builder()
                 .applicationComponent(((DemoApp) getApplication()).getAppComponent())
                 .employeesModule(new EmployeesModule(this))
@@ -36,16 +37,17 @@ public class EmployeeActivity extends AppCompatActivity {
         employeeComponent.inject(this);
 
         if (savedInstanceState == null) {
-            presenter.loadCompany().subscribe(employeeResponse -> loadData());
+            presenter.loadCompany().subscribe(employeeResponse -> loadDataExample());
         } else {
-            loadData();
+            loadDataExample();
         }
     }
 
-    private void loadData() {
-        /************************************************************************
-         * Here's some examples on how to get the data and subscribe to it.
-         ***********************************************************************/
+
+    /************************************************************************
+     * Here's some examples on how to get the data and subscribe to it.
+     ***********************************************************************/
+    private void loadDataExample() {
 
         presenter.getCompanyName().subscribe(company -> companyNameTv.setText(company));
 
