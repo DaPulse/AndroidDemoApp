@@ -1,24 +1,15 @@
 package demoapp.dapulse.com.dapulsedemoapp.features.employees;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
 
-import javax.inject.Inject;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import demoapp.dapulse.com.dapulsedemoapp.DemoApp;
 import demoapp.dapulse.com.dapulsedemoapp.R;
-import demoapp.dapulse.com.dapulsedemoapp.dagger.DaggerEmployeesComponent;
-import demoapp.dapulse.com.dapulsedemoapp.dagger.EmployeesComponent;
-import demoapp.dapulse.com.dapulsedemoapp.dagger.EmployeesModule;
+import demoapp.dapulse.com.dapulsedemoapp.features.employees.base.BaseEmployeeActivity;
 
-public class EmployeeActivity extends AppCompatActivity {
-
-    @Inject
-    EmployeePresenter presenter;
+public class EmployeeActivity extends BaseEmployeeActivity {
 
     @BindView(R.id.text_view)
     TextView companyNameTv;
@@ -28,13 +19,6 @@ public class EmployeeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_users);
         ButterKnife.bind(this);
-
-        //setup Dagger to resolve all Dependencies - Ignore this part
-        EmployeesComponent employeeComponent = DaggerEmployeesComponent.builder()
-                .applicationComponent(((DemoApp) getApplication()).getAppComponent())
-                .employeesModule(new EmployeesModule(this))
-                .build();
-        employeeComponent.inject(this);
 
         if (savedInstanceState == null) {
             presenter.loadCompany().subscribe(employeeResponse -> loadDataExample());
