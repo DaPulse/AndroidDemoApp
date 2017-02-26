@@ -25,7 +25,7 @@ public class EmployeePresenter implements EmployeesVIP.Presenter {
 
     @Override
     public Observable<EmployeeResponse> loadCompany() {
-        return interactor.loadEmployees();
+        return interactor.loadEmployees().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
     @Override
