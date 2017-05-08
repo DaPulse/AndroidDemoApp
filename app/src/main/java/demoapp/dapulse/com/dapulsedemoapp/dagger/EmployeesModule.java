@@ -2,6 +2,7 @@ package demoapp.dapulse.com.dapulsedemoapp.dagger;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 
 import javax.inject.Named;
@@ -16,9 +17,9 @@ import demoapp.dapulse.com.dapulsedemoapp.features.employees.repo.RealmEmployeeC
 
 @Module
 public class EmployeesModule {
-    private final AppCompatActivity activity;
+    private final FragmentActivity activity;
 
-    public EmployeesModule(AppCompatActivity activity) {
+    public EmployeesModule(FragmentActivity activity) {
         this.activity = activity;
     }
 
