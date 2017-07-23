@@ -39,11 +39,6 @@ public class EmployeePresenter implements EmployeesVIP.Presenter {
     }
 
     @Override
-    public Observable<List<Employee>> getDepartmentEmployees(String department) {
-        return interactor.getDepartmentEmployees(department).subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread());
-    }
-
-    @Override
     public Observable<Employee> getEmployeeById(int id) {
         return interactor.getEmployee(id).subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread());
     }

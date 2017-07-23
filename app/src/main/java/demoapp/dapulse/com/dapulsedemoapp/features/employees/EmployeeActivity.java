@@ -20,6 +20,10 @@ public class EmployeeActivity extends BaseEmployeeActivity {
         setContentView(R.layout.activity_users);
         ButterKnife.bind(this);
 
+        // make sure you call `presenter.loadCompany()` before any other call,
+        // that's the method that fetch and parse the data.
+        // if you'll try to call anything before `loadCompany` you won't have
+        //  any data in the response.
         if (savedInstanceState == null) {
             presenter.loadCompany().subscribe(employeeResponse -> loadDataExample());
         } else {
@@ -33,14 +37,12 @@ public class EmployeeActivity extends BaseEmployeeActivity {
      ***********************************************************************/
     private void loadDataExample() {
 
-        presenter.getCompanyName().subscribe(company -> companyNameTv.setText(company));
+        presenter.getCompanyName().subscribe(company -> {
+            companyNameTv.setText(company);
+        });
 
         presenter.getTopLevelManagement().subscribe(employees -> {
             Log.d("EmployeeActivity", "got top level management data");
-        });
-
-        presenter.getDepartmentEmployees("Customer Success").subscribe(list -> {
-            Log.d("EmployeeActivity", "got department data: " + list.size());
         });
 
         presenter.getEmployeeById(16).subscribe(employee -> {

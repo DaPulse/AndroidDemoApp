@@ -19,8 +19,6 @@ public interface EmployeesVIP {
 
         Observable<List<Employee>> getTopLevelManagement();
 
-        Observable<List<Employee>> getDepartmentEmployees(String department);
-
         Observable<List<Employee>> getManagerEmployees(int managerId);
 
         Observable<Employee> getEmployee(int id);
@@ -35,8 +33,6 @@ public interface EmployeesVIP {
 
         Observable<List<Employee>> getTopLevelManagement();
 
-        Observable<List<Employee>> getDepartmentEmployees(String department);
-
         Observable<Employee> getEmployeeById(int id);
 
         Observable<List<Employee>> getManagerEmployeesByManagerId(int managerId);
@@ -50,11 +46,7 @@ public interface EmployeesVIP {
 
         List<Employee> getManagerEmployees(int managerId);
 
-        List<Employee> getAll();
-
         List<Employee> getTopLevelManagement();
-
-        List<Employee> getDepartmentEmployees(String department);
 
         @Nullable
         Employee getEmployee(int id);

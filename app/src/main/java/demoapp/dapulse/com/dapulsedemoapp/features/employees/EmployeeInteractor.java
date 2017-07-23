@@ -26,9 +26,8 @@ public class EmployeeInteractor implements EmployeesVIP.Interactor {
 
     @Override
     public Observable<EmployeeResponse> loadEmployees() {
-        return serverApi.getEmployees().map(response -> {
+        return serverApi.getEmployees().doOnNext(response -> {
             repository.saveData(response);
-            return response;
         });
     }
 
@@ -37,15 +36,6 @@ public class EmployeeInteractor implements EmployeesVIP.Interactor {
         return Observable.create(subscriber -> {
             List<Employee> topLevelManagement = repository.getTopLevelManagement();
             subscriber.onNext(topLevelManagement);
-            subscriber.onCompleted();
-        });
-    }
-
-    @Override
-    public Observable<List<Employee>> getDepartmentEmployees(String department) {
-        return Observable.create(subscriber -> {
-            List<Employee> departmentEmployees = repository.getDepartmentEmployees(department);
-            subscriber.onNext(departmentEmployees);
             subscriber.onCompleted();
         });
     }

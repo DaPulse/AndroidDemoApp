@@ -76,40 +76,10 @@ public class EmployeeRepo implements EmployeesVIP.Repository {
     }
 
     @Override
-    public List<Employee> getAll() {
-        Realm realm = Realm.getDefaultInstance();
-        try {
-            RealmResults<RealmEmployee> all = realm.where(RealmEmployee.class).findAll();
-            ArrayList<Employee> list = new ArrayList<>(all.size());
-            for (RealmEmployee realmEmployee : all) {
-                list.add(converter.convertFromRealm(realmEmployee));
-            }
-            return list;
-        } finally {
-            realm.close();
-        }
-    }
-
-    @Override
     public List<Employee> getTopLevelManagement() {
         Realm realm = Realm.getDefaultInstance();
         try {
             RealmResults<RealmEmployee> all = realm.where(RealmEmployee.class).isNull("managerId").findAll();
-            ArrayList<Employee> list = new ArrayList<>(all.size());
-            for (RealmEmployee realmEmployee : all) {
-                list.add(converter.convertFromRealm(realmEmployee));
-            }
-            return list;
-        } finally {
-            realm.close();
-        }
-    }
-
-    @Override
-    public List<Employee> getDepartmentEmployees(String department) {
-        Realm realm = Realm.getDefaultInstance();
-        try {
-            RealmResults<RealmEmployee> all = realm.where(RealmEmployee.class).equalTo("department", department).findAll();
             ArrayList<Employee> list = new ArrayList<>(all.size());
             for (RealmEmployee realmEmployee : all) {
                 list.add(converter.convertFromRealm(realmEmployee));
